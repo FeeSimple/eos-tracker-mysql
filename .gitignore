@@ -1,0 +1,53 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+./eos-tracker-frontend/build
+
+# compiled output
+./eos-tracker-frontend/dist
+./eos-tracker-frontend/tmp
+./eos-tracker-frontend/out-tsc
+
+/_toremove
+
+# dependencies
+./eos-tracker-frontend/node_modules
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+testem.log
+/typings
+
+# e2e
+./eos-tracker-frontend/e2e/*.js
+./eos-tracker-frontend/e2e/*.map
+
+# System Files
+.DS_Store
+Thumbs.db
+
+./eos-tracker-api/.web-server-pid
+./eos-tracker-api/build/
+./eos-tracker-api/phpunit.xml
+./eos-tracker-api/var/
+./eos-tracker-api/vendor/
+./eos-tracker-api/web/bundles/
