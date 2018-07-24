@@ -1,7 +1,7 @@
-💎 EOS Tracker API
+💎 XFS Tracker API
 ========================
 
-EOS Tracker API is a PHP Backend based on Symfony3 that connects to a MySQL database.
+XFS Tracker API is a PHP Backend based on Symfony3 that connects to a MySQL database.
 
 📌 Requirements
 ------------

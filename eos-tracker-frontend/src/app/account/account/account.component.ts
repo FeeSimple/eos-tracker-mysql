@@ -72,21 +72,21 @@ export class AccountComponent implements OnInit {
         }
       ).then(result => {
           let base = parseFloat(result.rows[0].base.balance.replace(' RAM', ''));
-          let quote = parseFloat(result.rows[0].quote.balance.replace(' EOS', ''));
+          let quote = parseFloat(result.rows[0].quote.balance.replace(' XFS', ''));
           this.ramPrice = quote / base;
       });
 
-      this.eosService.eos.getCurrencyBalance('eosio.token', this.name, 'EOS').then(result => {
+      this.eosService.eos.getCurrencyBalance('eosio.token', this.name, 'XFS').then(result => {
         this.balance = 0;
         if (result && result[0]) {
-          this.balance = parseFloat(result[0].replace(' EOS', ''));
+          this.balance = parseFloat(result[0].replace(' XFS', ''));
         }
       });
 
       this.accountService.getTokens().subscribe(data => {
         data.forEach((item, index) => {
           this.eosService.eos.getCurrencyBalance(data[index].account, this.name, data[index].symbol).then(result => {
-            if (data[index].symbol !== 'EOS' && result && result[0]) {
+            if (data[index].symbol !== 'XFS' && result && result[0]) {
                 this.tokens.push(result[0]);
             }
           });

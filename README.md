@@ -1,6 +1,6 @@
-# EOS tracker tool with MySQL
+# XFS tracker tool with MySQL
 
-EOS tracker tool is made up of the following things:
+XFS tracker tool is made up of the following things:
 
     eos-tracker-frontend <--> eos-tracker-api <--> MySQL <--> Redis <--> nodeos
 
@@ -53,7 +53,7 @@ Ref link: https://docs.mongodb.com/manual/reference/mongo-shell
 
 ## nodeos
 
-Start nodeos (EOS daemon) with connection to mongodb named "EOStest"
+Start nodeos (XFS daemon) with connection to mongodb named "EOStest"
 by running the following cmd:
 
     cd nodeos
@@ -66,7 +66,7 @@ by running the following cmd:
 
 https://github.com/EOSEssentials/EOSTracker-API
 
-EOS Tracker API is a PHP Backend based on Symfony3 that connects to a MongoDB database.
+XFS Tracker API is a PHP Backend based on Symfony3 that connects to a MongoDB database.
 
 First, install the below dependencies:
 
@@ -160,7 +160,7 @@ Or run this cmd:
 
 https://github.com/EOSEssentials/EOSTracker
 
-EOS Tracker is a Frontend based on Angular4 that connects to EOS Tracker API.
+XFS Tracker is a Frontend based on Angular4 that connects to XFS Tracker API.
 
 Config file of eos-tracker-frontend for interacting with eos-tracker-api:
 

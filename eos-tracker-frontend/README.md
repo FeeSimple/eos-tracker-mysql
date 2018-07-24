@@ -1,7 +1,7 @@
-💎 EOS Tracker
+💎 XFS Tracker
 ========================
 
-EOS Tracker is a Frontend based on Angular4 that connects to [EOS Tracker API](https://github.com/EOSEssentials/EOSTracker-API).
+XFS Tracker is a Frontend based on Angular4 that connects to [XFS Tracker API](https://github.com/EOSEssentials/EOSTracker-API).
 
 📌 Getting Started
 ------------

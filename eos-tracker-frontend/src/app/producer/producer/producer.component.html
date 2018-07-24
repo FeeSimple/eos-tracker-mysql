@@ -44,7 +44,7 @@
 								</tr>
 								<tr *ngIf="producer">
 									<td>{{ 'Daily Reward' | translate }}:</td>
-									<td>{{producer.reward}} EOS</td>
+									<td>{{producer.reward}} XFS</td>
 								</tr>
 							</table>
 						</div>
@@ -121,7 +121,7 @@
 								<tbody>
 								<tr *ngFor="let vote of votes">
 									<td><a routerLink="/accounts/{{vote.account}}">{{vote.account}}</a></td>
-									<td>{{vote.staked | number}} EOS</td>
+									<td>{{vote.staked | number}} XFS</td>
 									<td>{{vote.votes.length}}</td>
 								</tr>
 								</tbody>
