@@ -45,6 +45,7 @@ testem.log
 .DS_Store
 Thumbs.db
 
+./eos-tracker-api/composer.phar
 ./eos-tracker-api/.web-server-pid
 ./eos-tracker-api/build/
 ./eos-tracker-api/phpunit.xml
