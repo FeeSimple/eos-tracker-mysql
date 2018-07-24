@@ -1,8 +1,6 @@
-# This file is a "template" of what your parameters.yml file should look like
-# Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
-# https://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
+# This file is auto-generated during the composer install
 parameters:
-    # A secret key that's used to generate certain security-related tokens
-    secret: ThisTokenIsNotSoSecretChangeIt
+    secret: 123 
     env(DB_URL): 'mysql://root@localhost/eos'
+    env(DB_PASSWORD): 'feesimple'
     env(REDIS_URL): 'redis://root@localhost:6379'

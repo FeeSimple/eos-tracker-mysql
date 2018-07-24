@@ -9,6 +9,6 @@ export const environment = {
   votingUrl: 'https://eosportal.io',
   appName: 'XFS Tracker',
   logoUrl: '/assets/logo.png',
-  apiUrl: 'http://127.0.0.1:4201',
+  apiUrl: 'http://138.197.194.220:4201',
   blockchainUrl: 'http://138.197.194.220:8877'
 };

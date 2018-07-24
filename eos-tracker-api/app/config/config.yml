@@ -62,6 +62,7 @@ doctrine:
         driver:   pdo_mysql
         server_version: 5.7
         charset:  UTF8
+        password: "%env(DB_PASSWORD)%" 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
         metadata_cache_driver: apcu # enable clear cache if changed
