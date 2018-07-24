@@ -2,7 +2,13 @@
 
 EOS tracker tool is made up of the following things:
 
-    eos-tracker-frontend <--> eos-tracker-api <--> MySQL <--> nodeos
+    eos-tracker-frontend <--> eos-tracker-api <--> MySQL <--> Redis <--> nodeos
+
+## Redis
+
+Install and start
+
+    https://redis.io/download
 
 ## Mongodb
 
@@ -70,13 +76,24 @@ Install PHP 7.2 (Ubuntu)
     sudo apt-get update
     sudo apt-get install php7.2
 
-Install others (Ubuntu)
+Install PHP MongoDB Driver (Ubuntu)
 
     sudo apt-get install php7.2-mongodb
-    sudo apt-get install php7.2-cli
-    sudo apt-get install php7.2-xml
+
+Install PHP MySQL Driver (Ubuntu)
+
+    // https://stackoverflow.com/questions/32728860/php-7-rc3-how-to-install-missing-mysql-pdo
+    sudo apt-get install php7.2-mysql
+    sudo phpenmod pdo_mysql
+
+Install others (Ubuntu)
+
+    sudo apt-get install php7.2-cli php7.2-xml
     sudo apt-get install php7.2-mbstring php7.2-intl php7.2-redis -y
-    apt-get install composer
+
+ Install composer
+
+    https://getcomposer.org/download/
 
 Install PHP 7.2 (Mac)
 
@@ -88,7 +105,7 @@ Install others (Mac)
     sudo pecl install mongodb
 
 
-Run composer cmd
+Install dependencies with composer
 
     composer update
     composer install
@@ -97,10 +114,38 @@ Config file of MongDB for eos-tracker-api
 
     app/config/parameters.yml
 
-    # This file is auto-generated during the composer install parameters:
-    secret: 123
-    mongodb_server: 'mongodb://localhost:27017'
-    db_name: EOStest
+        # This file is auto-generated during the composer install parameters:
+        secret: 123
+        mongodb_server: 'mongodb://localhost:27017'
+        db_name: EOStest
+
+Config file of MySQL for eos-tracker-api
+
+    // Specify MySQL URL and password
+    app/config/parameters.yml
+
+        # This file is auto-generated during the composer install parameters:
+        secret: 123
+        env(DB_URL): 'mysql://root@localhost/eos'
+        env(DB_PASSWORD): 'feesimple'
+        env(REDIS_URL): 'redis://root@localhost:6379'
+
+
+    // Use the above-specified MySQL URL and password
+    app/config/config.yml
+
+        ....
+
+        doctrine:
+             dbal:
+                 url: "%env(DB_URL)%"
+                 driver:   pdo_mysql
+                 server_version: 5.7
+                 charset:  UTF8
+                 password: "%env(DB_PASSWORD)%"
+
+        ....
+
 
 To start:
 
@@ -134,7 +179,7 @@ export const environment = {
 Installation
 
     sudo npm install -g @angular/cli@latest
-    
+
     npm install
 
     // Critical to run the below cmd. Otherwise, cannot start server
