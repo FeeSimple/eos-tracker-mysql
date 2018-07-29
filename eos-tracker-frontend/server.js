@@ -1,6 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-
+const path = require('path');
 var httpsServer = require('https');
 var httpServer = require('http');
 const fs = require('fs');
@@ -9,8 +9,8 @@ var httpsApp = express();
 var httpApp = express();
 
 const httpsOpt = {
-    cert: fs.readFileSync('/etc/letsencrypt/live/feesimplewallet.io-0002/fullchain.pem'),
-    key: fs.readFileSync('/etc/letsencrypt/live/feesimplewallet.io-0002/privkey.pem')
+    cert: fs.readFileSync('/etc/letsencrypt/live/www.feesimpletracker.io/fullchain.pem'),
+    key: fs.readFileSync('/etc/letsencrypt/live/www.feesimpletracker.io/privkey.pem')
 };
 
 httpsApp.set('port', 443); // default port for https is 443

@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "node server.js",
+    "start": "npm run build && node server.js",
     "dev": "ng serve",
     "build": "ng build --prod",
     "test": "ng test",
@@ -37,7 +37,8 @@
     "npm": "^5.10.0",
     "path": "^0.12.7",
     "rxjs": "^6.2.1",
-    "zone.js": "^0.8.26"
+    "zone.js": "^0.8.26",
+    "helmet": "^3.13.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.6.8",
