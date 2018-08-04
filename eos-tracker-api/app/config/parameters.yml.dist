@@ -6,4 +6,5 @@ parameters:
     secret: ThisTokenIsNotSoSecretChangeIt
     env(DB_URL): 'mysql://root@localhost/eos'
     env(DB_PASSWORD): 'feesimple'
+    env(MONGO_URL): 'mongodb://localhost:27017/EOS'
     env(REDIS_URL): 'redis://root@localhost:6379'

@@ -78,6 +78,12 @@ class BlockController extends Controller
      */
     public function blockTransactionsAction(string $id, Request $request)
     {
+        $service = $this->get('api.block_service');
+        $item = $service->findOneBy(['blockNumber' => $id]);
+        if (!$item) {
+            return new JsonResponse(['error' => 'entity not found'], 404);
+        }
+
         $size = $request->query->getInt('size', 30);
         $page = $request->query->getInt('page', 1);
         $result = $this->get('cache.app')->getItem('block_transaction_'.$id.'_'.$page.'_'.$size);
