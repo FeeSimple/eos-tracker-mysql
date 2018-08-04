@@ -5,10 +5,10 @@
 
 export const environment = {
   production: false,
-  walletUrl: 'http://138.197.194.220:3000',
+  walletUrl: 'https://feesimplewallet.io',
   votingUrl: 'https://eosportal.io',
   appName: 'XFS Tracker',
   logoUrl: '/assets/logo.png',
-  apiUrl: 'http://138.197.194.220:4201',
-  blockchainUrl: 'http://138.197.194.220:8877'
+  apiUrl: 'https://feesimpletracker.io:444',
+  blockchainUrl: 'http://127.0.0.1:8877'
 };
