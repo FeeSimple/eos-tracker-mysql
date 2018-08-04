@@ -10,50 +10,10 @@ Install and start
 
     https://redis.io/download
 
-## Mongodb
-
-By default on Ubuntu, mongodb is compiled and built as plugin of nodeos.
-To determine if mongodb is supported by nodeos, run the following cmd and
-check if "--mongodb-uri" option available
-
-Installation dir of mongodb:
-    ~/opt/mongodb
-
-Config file of mongodb:
-
-    ~/opt/mongodb/mongod.conf
-
-Command to start mongod (MongoDB daemon):
-
-    ~/opt/mongodb/bin/mongod -f ~/opt/mongodb/mongod.conf &
-
-
-Or run the provided script "script_mongod.sh" in the folder "mongo"
-
-View log output of mongod:
-
-    tail -f ~/opt/mongodb/log/mongodb.log
-
-By default, mongod is listenning at localhost:27017
-
-Interact with mongo database:
-Ref link: https://docs.mongodb.com/manual/reference/mongo-shell
-
-```
-    ~/opt/mongodb/bin/mongo
-
-    show dbs    
-
-    use EOStest
-
-    show tables
-
-    db.transactions.count()
-```
 
 ## nodeos
 
-Start nodeos (XFS daemon) with connection to mongodb named "EOStest"
+Start nodeos (EOS daemon) with connection to mongodb named "EOStest"
 by running the following cmd:
 
     cd nodeos
@@ -66,7 +26,7 @@ by running the following cmd:
 
 https://github.com/EOSEssentials/EOSTracker-API
 
-XFS Tracker API is a PHP Backend based on Symfony3 that connects to a MongoDB database.
+EOS Tracker API is a PHP Backend based on Symfony3 that connects to a MySQL database.
 
 First, install the below dependencies:
 
@@ -110,16 +70,8 @@ Install dependencies with composer
     composer update
     composer install
 
-Config file of MongDB for eos-tracker-api
 
-    app/config/parameters.yml
-
-        # This file is auto-generated during the composer install parameters:
-        secret: 123
-        mongodb_server: 'mongodb://localhost:27017'
-        db_name: EOStest
-
-Config file of MySQL for eos-tracker-api
+Config file of MySQL connection for eos-tracker-api
 
     // Specify MySQL URL and password
     app/config/parameters.yml
@@ -149,7 +101,11 @@ Config file of MySQL for eos-tracker-api
 
 To start:
 
-    php bin/console server:run
+    // API server listens at port 4201.
+    // The port 4201 is specified in the nginx config file
+    // /etc/nginx/conf.d/feesimpletracker.io.conf
+
+    php bin/console server:run 127.0.0.1:4201
 
 Or run this cmd:
 
@@ -168,19 +124,27 @@ Config file of eos-tracker-frontend for interacting with eos-tracker-api:
 
             ```
             export const environment = {
-            production: true,
-            walletUrl: 'http://138.197.194.220:3000',
-            votingUrl: 'https://eosportal.io',
-            appName: 'XFS Tracker',
-            logoUrl: '/assets/logo.png',
-            apiUrl: 'http://127.0.0.1:4201',
-            blockchainUrl: 'http://138.197.194.220:8877'
-            };
+                production: true,
+                walletUrl: 'https://feesimplewallet.io',
+                votingUrl: 'https://eosportal.io',
+                appName: 'XFS Tracker',
+                logoUrl: '/assets/logo.png',
+                apiUrl: 'https://feesimpletracker.io:444',
+                blockchainUrl: 'http://127.0.0.1:8877'
+             };
             ```
 
-        *Note:* 
+*Note:*
 
-        Do not use `src/environments/environment.ts` as it's only for dev mode running with `ng serve`
+    Do not use `src/environments/environment.ts` as it's only for dev mode running with `ng serve`
+
+*Note:*
+
+    `apiUrl` is specified with https at port 444.
+    The port 444 is specified in the nginx config file
+    `/etc/nginx/conf.d/feesimpletracker.io.conf`.
+    Any traffic to https at port 444 will be redirected to 127.0.0.1:4201
+
 
 Installation
 
@@ -193,7 +157,7 @@ Installation
 
 To start the frontend at specific IP:Port
 
-    npm run start
+    npm start
 
     or run the below cmd:
     pm2 start script_run_frontend.sh

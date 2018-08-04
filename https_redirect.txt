@@ -1,0 +1,20 @@
+# Enable https, redirect http to https, redirect www to non-www
+
+For eos-tracker-frontend (Angular app based on nginx):
+
+    According to this link `https://gist.github.com/ryanhanwu/5321302`
+    Modify the `server.js` so that the frontend will:
+        -> listen at port 80 for http and port 443 for https
+        -> http traffic will be redirected to https traffic
+        -> no needed handling for http
+
+    Right here, frontend doesn't need nginx and frontend will load only the index.html
+
+For eos-tracker-api (Symfony app based on nginx)
+
+    Configure nginx to enable https and redirect http to https at port 444.
+    Thus, apiEndpoint is `https://feesimpletracker.io:444`
+
+    The https traffic to `api` will actually be handled by 127.0.0.1:4201
+
+Nginx config file is stored at `/etc/nginx/conf.d/feesimpletracker.io.conf`
