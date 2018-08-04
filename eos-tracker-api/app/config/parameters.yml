@@ -1,6 +1,7 @@
 # This file is auto-generated during the composer install
 parameters:
-    secret: 123 
+    secret: 123
     env(DB_URL): 'mysql://root@localhost/eos'
-    env(DB_PASSWORD): 'feesimple'
+    env(DB_PASSWORD): feesimple
     env(REDIS_URL): 'redis://root@localhost:6379'
+    env(MONGO_URL): 'mongodb://localhost:27017/EOS'
