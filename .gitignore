@@ -1,7 +1,7 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 ./eos-tracker-frontend/build
-./eos-tracker-frontend/dist/
+/eos-tracker-frontend/dist/
 
 # compiled output
 ./eos-tracker-frontend/dist
