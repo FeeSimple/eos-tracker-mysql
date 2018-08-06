@@ -110,7 +110,7 @@ export class EosService {
     })).pipe(
       map((result: any) => {
         let base = parseFloat(result.rows[0].base.balance.replace(' RAM', ''));
-        let quote = parseFloat(result.rows[0].quote.balance.replace(' EOS', ''));
+        let quote = parseFloat(result.rows[0].quote.balance.replace(' XFS', ''));
         return quote / base;
       })
     );
