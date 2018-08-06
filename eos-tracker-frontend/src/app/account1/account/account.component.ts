@@ -59,7 +59,7 @@ export class AccountComponent implements OnInit {
               raw: accountRaw,
               balance: balance,
               ramPrice: ramPrice,
-              tokens: null
+              tokens: []
             };
           })
         );
