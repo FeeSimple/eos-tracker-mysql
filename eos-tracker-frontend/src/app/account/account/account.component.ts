@@ -83,15 +83,15 @@ export class AccountComponent implements OnInit {
         }
       });
 
-      this.accountService.getTokens().subscribe(data => {
-        data.forEach((item, index) => {
-          this.eosService.eos.getCurrencyBalance(data[index].account, this.name, data[index].symbol).then(result => {
-            if (data[index].symbol !== 'XFS' && result && result[0]) {
-                this.tokens.push(result[0]);
-            }
-          });
-        });
-      });
+      // this.accountService.getTokens().subscribe(data => {
+      //   data.forEach((item, index) => {
+      //     this.eosService.eos.getCurrencyBalance(data[index].account, this.name, data[index].symbol).then(result => {
+      //       if (data[index].symbol !== 'XFS' && result && result[0]) {
+      //           this.tokens.push(result[0]);
+      //       }
+      //     });
+      //   });
+      // });
 
       this.cmcService.getEOSTicker().subscribe(result => {
         if (result['data']) {

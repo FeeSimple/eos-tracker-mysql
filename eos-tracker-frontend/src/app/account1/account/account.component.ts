@@ -49,16 +49,17 @@ export class AccountComponent implements OnInit {
         return combineLatest(
           this.eosService.getAccount(account.name),
           this.eosService.getCurrencyBalance(account.name),
-          this.eosService.getRamPrice(),
-          this.accountService.getAccountTokens(account.name)
+          this.eosService.getRamPrice()//,
+          //this.accountService.getAccountTokens(account.name)
         ).pipe(
-          map(([accountRaw, balance, ramPrice, tokens]) => {
+          //map(([accountRaw, balance, ramPrice, tokens]) => {
+          map(([accountRaw, balance, ramPrice]) => {
             return {
               ...account,
               raw: accountRaw,
               balance: balance,
               ramPrice: ramPrice,
-              tokens: tokens
+              tokens: null
             };
           })
         );
