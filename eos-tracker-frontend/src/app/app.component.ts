@@ -12,7 +12,7 @@ declare let ga: Function;
 })
 
 export class AppComponent {
-  title = 'XFS Tracker | EosTracker.io';
+  title = 'FeeSimple XFS Tracker | feesimpletracker.io';
   @LocalStorage()
   language: any;
 
