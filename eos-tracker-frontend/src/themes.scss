@@ -1,20 +1,20 @@
 @import '~@angular/material/theming';
 
-$mat-eosio: (
-    50 : #e9e8ea,
-    100 : #c7c5cc,
-    200 : #a29faa,
-    300 : #7c7987,
-    400 : #605c6e,
-    500 : #443f54,
-    600 : #3e394d,
-    700 : #353143,
-    800 : #2d293a,
-    900 : #1f1b29,
-    A100 : #9470ff,
-    A200 : #6e3dff,
-    A400 : #470aff,
-    A700 : #3c00f0,
+$mat-feesimple: (
+    50 : #dededf,
+    100 : #d8d8d9,
+    200 : #c2c3c5,
+    300 : #a8aaad,
+    400 : #898c90,
+    500 : #676b72,
+    600 : #484d55,
+    700 : #2d333c,
+    800 : #1a212b,
+    900 : #101721,
+    A100 : #4bfcff,
+    A200 : #32e3ff,
+    A400 : #19caff,
+    A700 : #00b1ef,
     contrast: (
         50 : #000000,
         100 : #000000,
@@ -35,14 +35,14 @@ $mat-eosio: (
 
 @include mat-core();
 
-$app-light-primary: mat-palette($mat-eosio);
-$app-light-accent: mat-palette($mat-eosio, A200, A100, A400);
+$app-light-primary: mat-palette($mat-feesimple);
+$app-light-accent: mat-palette($mat-feesimple, A200, A100, A400);
 $app-light-warn: mat-palette($mat-red);
 $app-light-theme: mat-light-theme($app-light-primary, $app-light-accent, $app-light-warn);
 @include angular-material-theme($app-light-theme);
 
-$app-dark-primary: mat-palette($mat-eosio);
-$app-dark-accent: mat-palette($mat-eosio, A200, A100, A400);
+$app-dark-primary: mat-palette($mat-feesimple);
+$app-dark-accent: mat-palette($mat-feesimple, A200, A100, A400);
 $app-dark-warn: mat-palette($mat-red);
 $app-dark-theme: mat-dark-theme($app-dark-primary, $app-dark-accent, $app-dark-warn);
 .dark-theme {
