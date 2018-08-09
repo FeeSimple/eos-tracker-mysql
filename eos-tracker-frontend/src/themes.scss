@@ -36,13 +36,13 @@ $mat-feesimple: (
 @include mat-core();
 
 $app-light-primary: mat-palette($mat-feesimple);
-$app-light-accent: mat-palette($mat-feesimple, A700, A200, A400);
+$app-light-accent: mat-palette($mat-feesimple, A700, A400, A200);
 $app-light-warn: mat-palette($mat-red);
 $app-light-theme: mat-light-theme($app-light-primary, $app-light-accent, $app-light-warn);
 @include angular-material-theme($app-light-theme);
 
 $app-dark-primary: mat-palette($mat-feesimple);
-$app-dark-accent: mat-palette($mat-feesimple, A700, A200, A400);
+$app-dark-accent: mat-palette($mat-feesimple, A700, A400, A200);
 $app-dark-warn: mat-palette($mat-red);
 $app-dark-theme: mat-dark-theme($app-dark-primary, $app-dark-accent, $app-dark-warn);
 .dark-theme {
