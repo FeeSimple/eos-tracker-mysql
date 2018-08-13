@@ -77,5 +77,5 @@ doctrine:
           AppBundle:
             type: yml
             dir: Resources/config/doctrine
-            alias: EOSTracker
+            alias: XFSTracker
             prefix: AppBundle\Entity
