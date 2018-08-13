@@ -65,3 +65,26 @@ p {
     margin: 0;
     padding: 0;
 }
+
+/*** Color overwrite by --Masud-- ***/
+.mat-toolbar{
+  &.mat-primary{
+    background-color: mat-color($mat-feesimple, 100);
+    color: mat-color($mat-feesimple, 600);
+  }
+}
+app-header[_ngcontent-c1] {
+  background-color: mat-color($mat-feesimple, 900);
+  form[_ngcontent-c8] .mat-icon[_ngcontent-c8] {
+    //color: #ffffff;
+  }
+  form[_ngcontent-c8] input[_ngcontent-c8] {
+    background-color: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(204, 204, 204, 0.45);
+    color: #ffffff;
+  }
+  color: #ffffff;
+}
+header[_ngcontent-c2] .brand[_ngcontent-c2] {
+  color: #ffffff;
+}
