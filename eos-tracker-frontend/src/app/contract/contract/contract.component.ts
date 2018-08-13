@@ -1,16 +1,22 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {EosService} from '../../services/eos.service';
-import {ActionService} from '../../services/action.service';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { EosService } from '../../services/eos.service';
+import { ActionService } from '../../services/action.service';
+import { Action } from '../../models/Action';
+import { Observable, from, combineLatest } from 'rxjs';
+import { switchMap, map } from 'rxjs/operators';
+
+interface ActionRaw extends Action {
+  raw: any;
+}
 
 @Component({
-  selector: 'app-contract',
-  templateUrl: './contract.component.html'
+  templateUrl: './contract.component.html',
+  styleUrls: ['./contract.component.scss']
 })
 export class ContractComponent implements OnInit {
-  public id: string;
-  public action = null;
-  public actionRaw = null;
+
+  action$: Observable<ActionRaw>;
 
   constructor(
     private route: ActivatedRoute,
@@ -19,20 +25,26 @@ export class ContractComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.id = this.route.snapshot.params['id'];
-    this.actionService.getAction(this.id).subscribe(data => {
-      this.action = data;
-      console.log(this.action);
-
-      this.eosService.eos.getBlock(this.action.blockId).then(result => {
-        for (let index in result.transactions) {
-            if (result.transactions[index].trx.id == this.action.transaction) {
-              this.actionRaw = result.transactions[index];
-              return;
-            }
+    this.action$ = combineLatest(
+      this.route.params,
+      this.route.queryParams
+    ).pipe(
+      switchMap(([params, queryParams]) => {
+        if (params.id) {
+          return this.actionService.getAction(params.id);
+        } else {
+          return this.actionService.getActionSeq(params.trxId, params.seq, queryParams.parentId);
         }
-      });
-
-    });
+      }),
+      switchMap(action => {
+        return from(this.eosService.eos.getBlock(action.blockId)).pipe(
+          map((block: any) => block.transactions.find(transaction => transaction.trx.id === action.transaction))
+        );
+      }, (action, actionRaw) => ({
+        ...action,
+        raw: actionRaw
+      }))
+    );
   }
+
 }
