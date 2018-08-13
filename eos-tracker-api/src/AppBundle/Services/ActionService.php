@@ -11,10 +11,9 @@ class ActionService extends EntityRepository
     public function get(int $page = 1, int $limit = 30)
     {
         return $this->getEntityManager()->createQuery(<<<DQL
-SELECT a, att, acc
+SELECT a, att
 FROM AppBundle\Entity\Action a
 JOIN a.transaction att
-JOIN a.account acc
 WHERE a.parentId = 0
 ORDER BY a.id DESC
 DQL
@@ -27,16 +26,15 @@ DQL
     public function getFromAccount(Account $account, int $page = 1, int $limit = 30)
     {
         return $this->getEntityManager()->createQuery(<<<DQL
-SELECT a, aa, att, ac
+SELECT a, aa, att
 FROM AppBundle\Entity\Action a
 LEFT JOIN a.authorizations aa
 JOIN a.transaction att
-JOIN a.account ac
 WHERE aa.actor = :ACCOUNT
 ORDER BY a.id DESC
 DQL
         )
-            ->setParameter('ACCOUNT', $account)
+            ->setParameter('ACCOUNT', $account->name())
             ->setFirstResult($limit * ($page - 1))
             ->setMaxResults($limit)
             ->getResult();
@@ -56,16 +54,15 @@ DQL
     public function getToAccount(Account $account, int $page = 1, int $limit = 30)
     {
         return $this->getEntityManager()->createQuery(<<<DQL
-SELECT a, aa, att, ac
+SELECT a, aa, att
 FROM AppBundle\Entity\Action a
 LEFT JOIN a.authorizations aa
 JOIN a.transaction att
-JOIN a.account ac
 WHERE a.account = :ACCOUNT
 ORDER BY a.id DESC
 DQL
         )
-            ->setParameter('ACCOUNT', $account)
+            ->setParameter('ACCOUNT', $account->name())
             ->setFirstResult($limit * ($page - 1))
             ->setMaxResults($limit)
             ->getResult();
@@ -74,13 +71,12 @@ DQL
     public function getForTransaction(Transaction $transaction, int $page = 1, int $limit = 30)
     {
         return $this->getEntityManager()->createQuery(<<<DQL
-SELECT a, aa, att, ac
+SELECT a, aa, att
 FROM AppBundle\Entity\Action a
 LEFT JOIN a.authorizations aa
 JOIN a.transaction att
-JOIN a.account ac
 WHERE a.transaction = :TRANSACTION
-ORDER BY a.id DESC
+ORDER BY a.id ASC
 DQL
         )
             ->setParameter('TRANSACTION', $transaction)
