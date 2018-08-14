@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
   walletUrl: 'https://feesimplewallet.io',
-  votingUrl: 'https://eosportal.io',
+  votingUrl: '',
   appName: 'FeeSimple XFS Tracker',
   logoUrl: '/assets/logo.png',
   apiUrl: 'https://feesimpletracker.io:444',
