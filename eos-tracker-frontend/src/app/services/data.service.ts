@@ -28,10 +28,10 @@ export class DataService {
           .sort((a, b) => a.id > b.id)
           // group actions with parentId, this operation makes sure similar actions are grouped together, [] => [][]
           .reduce((accumulator, current) => {
-            if (current.parentId === 0) {
+            if (current.parent === 0) {
               accumulator.push([current]);
             } else {
-              const actions = accumulator.find(a => a[0].id === current.parentId);
+              const actions = accumulator.find(a => a[0].id === current.parent);
               if (actions) {
                 actions.push(current);
               }

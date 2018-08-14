@@ -33,7 +33,7 @@ export class ContractComponent implements OnInit {
         if (params.id) {
           return this.actionService.getAction(params.id);
         } else {
-          return this.actionService.getActionSeq(params.trxId, params.seq, queryParams.parentId);
+          return this.actionService.getActionSeq(params.trxId, params.seq, queryParams.parent);
         }
       }),
       switchMap(action => {
