@@ -26,7 +26,7 @@ export class DataService {
         return actions.map(action => action as Action)
           // show actions in ascending order
           .sort((a, b) => a.id > b.id)
-          // group actions with parentId, this operation makes sure similar actions are grouped together, [] => [][]
+          // group actions with parent, this operation makes sure similar actions are grouped together, [] => [][]
           .reduce((accumulator, current) => {
             if (current.parent === 0) {
               accumulator.push([current]);
@@ -55,7 +55,7 @@ export class DataService {
             return {
               ...action,
               authorizations: action.authorization,
-              parentId: 0,
+              parent: 0,
               seq: index,
               blockId: transaction.blockId,
               transaction: transaction.id

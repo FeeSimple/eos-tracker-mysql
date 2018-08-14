@@ -18,8 +18,8 @@ export class ActionService {
     );
   }
 
-  getActionSeq(trxId: string, seq = 0, parentId = 0): Observable<Action> {
-    return this.http.get(`${environment.apiUrl}/transactions/${trxId}/actions/${seq}?parentId=${parentId}`).pipe(
+  getActionSeq(trxId: string, seq = 0, parent = 0): Observable<Action> {
+    return this.http.get(`${environment.apiUrl}/transactions/${trxId}/actions/${seq}?parent=${parent}`).pipe(
       map(action => action as Action)
     );
   }

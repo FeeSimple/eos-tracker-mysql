@@ -7,7 +7,7 @@
         <ng-container matColumnDef="id">
           <th mat-header-cell *matHeaderCellDef>{{ 'Detail' | translate }}</th>
           <td mat-cell *matCellDef="let action">
-            <a [routerLink]="['/actions',action.blockId,action.transaction,action.seq]" [queryParams]="action.parent > 0 ? {parentId: action.parent} : {}">
+            <a [routerLink]="['/actions',action.blockId,action.transaction,action.seq]" [queryParams]="action.parent > 0 ? {parent: action.parent} : {}">
               <button mat-icon-button *ngIf="action.parent === 0">
                 <mat-icon aria-label="main action">data_usage</mat-icon>
               </button>

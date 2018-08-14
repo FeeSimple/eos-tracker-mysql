@@ -15,7 +15,7 @@ AppBundle\Entity\Action:
             type: string
         seq:
             type: integer
-        parentId:
+        parent:
             type: integer
     manyToOne:
         transaction:
