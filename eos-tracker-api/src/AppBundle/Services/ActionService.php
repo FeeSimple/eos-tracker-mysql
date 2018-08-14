@@ -13,7 +13,7 @@ class ActionService extends EntityRepository
         return $this->getEntityManager()->createQuery(<<<DQL
 SELECT a, att
 FROM AppBundle\Entity\Action a
-JOIN a.transaction_id att
+JOIN a.transaction att
 WHERE a.parent = 0
 ORDER BY a.id DESC
 DQL
@@ -29,7 +29,7 @@ DQL
 SELECT a, aa, att
 FROM AppBundle\Entity\Action a
 LEFT JOIN a.authorizations aa
-JOIN a.transaction_id att
+JOIN a.transaction att
 WHERE aa.actor = :ACCOUNT
 ORDER BY a.id DESC
 DQL
@@ -57,7 +57,7 @@ DQL
 SELECT a, aa, att
 FROM AppBundle\Entity\Action a
 LEFT JOIN a.authorizations aa
-JOIN a.transaction_id att
+JOIN a.transaction att
 WHERE a.account = :ACCOUNT
 ORDER BY a.id DESC
 DQL
@@ -74,8 +74,8 @@ DQL
 SELECT a, aa, att
 FROM AppBundle\Entity\Action a
 LEFT JOIN a.authorizations aa
-JOIN a.transaction_id att
-WHERE a.transaction_id = :TRANSACTION
+JOIN a.transaction att
+WHERE a.transaction = :TRANSACTION
 ORDER BY a.id ASC
 DQL
         )
