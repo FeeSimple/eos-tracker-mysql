@@ -18,9 +18,9 @@ AppBundle\Entity\Action:
         parent:
             type: integer
     manyToOne:
-        transaction:
+        transaction_id:
             targetEntity: AppBundle\Entity\Transaction
     oneToMany:
         authorizations:
           targetEntity: AppBundle\Entity\ActionAccount
-          mappedBy: action
+          mappedBy: action_id

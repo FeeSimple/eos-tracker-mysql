@@ -5,7 +5,7 @@ export interface Action {
   createdAt: number;
   data?: any;
   id: number;
-  parent: number,
+  parentId: number,
   seq: number;
   name: string;
   transaction: string;

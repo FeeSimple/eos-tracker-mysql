@@ -2,7 +2,7 @@ AppBundle\Entity\ActionAccount:
     type: entity
     table: actions_accounts
     id:
-        action:
+        action_id:
           associationKey: true
         actor:
           type: string

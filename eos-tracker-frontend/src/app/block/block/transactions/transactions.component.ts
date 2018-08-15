@@ -1,9 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { BlockService } from '../../../services/block.service';
-import { Transaction } from '../../../models/Transaction';
-import { Observable, of } from 'rxjs';
-import { switchMap, catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-block-transactions',
@@ -12,29 +7,19 @@ import { switchMap, catchError } from 'rxjs/operators';
 })
 export class TransactionsComponent implements OnInit {
 
-  @Input() id: number;
-  blockTransactions$: Observable<Transaction[]>;
+  @Input() block;
   transactionsColumns = [
+    'index',
     'id',
-    'blockId',
-    'createdAt',
-    'numActions'
+    'status',
+    'cpu',
+    'net',
+    'actions'
   ];
-  isError = false;
 
-  constructor(
-    private route: ActivatedRoute,
-    private blockService: BlockService
-  ) { }
+  constructor() { }
 
   ngOnInit() {
-    this.blockTransactions$ = this.route.queryParams.pipe(
-      switchMap(queryParams => this.blockService.getBlockTransactions(this.id, queryParams.page)),
-      catchError(err => {
-        this.isError = true;
-        return of([]);
-      })
-    );
   }
 
 }
