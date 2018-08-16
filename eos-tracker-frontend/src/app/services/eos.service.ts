@@ -198,10 +198,10 @@ export class EosService {
   }
 
   getCurrencyBalance(name: string): Observable<number> {
-    return from(this.eos.getCurrencyBalance('eosio.token', name, 'EOS')).pipe(
+    return from(this.eos.getCurrencyBalance('eosio.token', name, 'XFS')).pipe(
       map(result => {
         if (result && result[0]) {
-          return parseFloat(result[0].replace(' EOS', ''));
+          return parseFloat(result[0].replace(' XFS', ''));
         }
         return 0;
       })
@@ -218,7 +218,7 @@ export class EosService {
     })).pipe(
       map((result: any) => {
         let base = parseFloat(result.rows[0].base.balance.replace(' RAM', ''));
-        let quote = parseFloat(result.rows[0].quote.balance.replace(' EOS', ''));
+        let quote = parseFloat(result.rows[0].quote.balance.replace(' XFS', ''));
         return quote / base;
       })
     );

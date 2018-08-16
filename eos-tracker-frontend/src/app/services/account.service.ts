@@ -66,7 +66,7 @@ export class AccountService {
     return this.getTokens().pipe(
       switchMap(tokens => {
         const token$s = tokens
-          .filter(token => token.symbol !== 'EOS')
+          .filter(token => token.symbol !== 'XFS')
           .map(token => {
             return from(this.eosService.eos.getCurrencyBalance(token.account, name, token.symbol)).pipe(
               map((balance: string[]) => ({ ...token, balance: balance[0] })),

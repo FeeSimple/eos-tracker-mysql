@@ -11,7 +11,7 @@ class StatsCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('eostracker:stats')
+            ->setName('feesimpletracker:stats')
             ->setDescription('Generate Stats');
     }
 

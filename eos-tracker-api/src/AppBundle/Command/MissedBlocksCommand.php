@@ -12,7 +12,7 @@ class MissedBlocksCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('eostracker:missed-blocks')
+            ->setName('feesimpletracker:missed-blocks')
             ->setDescription('Check Missed blocks')
             ->addOption('scheduling', '', InputOption::VALUE_OPTIONAL);
     }

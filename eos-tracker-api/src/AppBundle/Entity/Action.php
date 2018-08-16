@@ -86,6 +86,7 @@ class Action
         $authorizations = [];
         foreach($this->authorizations() as $authorization)
         {
+            error_log('authorizationsToArray - authorization: ' . print_r($authorization, true));
             $authorizations[] = $authorization->toArray();
         }
 
