@@ -14,7 +14,7 @@ class ActionService extends EntityRepository
 SELECT a, att
 FROM AppBundle\Entity\Action a
 JOIN a.transaction att
-WHERE a.parent = 0
+WHERE a.parent IS NULL
 ORDER BY a.id DESC
 DQL
         )

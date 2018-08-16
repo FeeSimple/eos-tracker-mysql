@@ -32,7 +32,7 @@ class Action
 
     public function parent(): int
     {
-        return $this->parent;
+        return 0;//$this->parent;
     }
 
     public function seq(): int
@@ -84,12 +84,11 @@ class Action
     private function authorizationsToArray()
     {
         $authorizations = [];
-        foreach($this->authorizations() as $authorization)
-        {
-            error_log('authorizationsToArray - authorization: ' . print_r($authorization, true));
-            $authorizations[] = $authorization->toArray();
-        }
-
+        // foreach($this->authorizations() as $authorization)
+        // {
+        //     error_log('authorizationsToArray - authorization: ' . print_r($authorization, true));
+        //     $authorizations[] = $authorization->toArray();
+        // }
         return $authorizations;
     }
 }
