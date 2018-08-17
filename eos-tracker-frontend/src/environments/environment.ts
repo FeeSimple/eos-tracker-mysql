@@ -6,7 +6,7 @@
 export const environment = {
   production: false,
   walletUrl: 'https://feesimplewallet.io',
-  votingUrl: '',
+  votingUrl: 'https://feesimple.io',
   appName: 'FeeSimple XFS Tracker',
   logoUrl: '/assets/logo.png',
   apiUrl: 'https://feesimpletracker.io:444',
