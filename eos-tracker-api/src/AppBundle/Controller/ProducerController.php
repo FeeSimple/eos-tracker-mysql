@@ -24,10 +24,12 @@ class ProducerController extends Controller
             return new JsonResponse($result->get());
         }
 
-        $content = json_decode(file_get_contents($urlJsonBp));
-        if (!$content || !isset($content->producer_account_name)) {
-            return new JsonResponse(['error' => 'invalid JSON'], 400);
-        }
+        // Temporarily disable to avoid exception
+        // $content = json_decode(file_get_contents($urlJsonBp));
+        // if (!$content || !isset($content->producer_account_name)) {
+        //     return new JsonResponse(['error' => 'invalid JSON'], 400);
+        // }
+        $content = '';
 
         $result->set($content)->expiresAfter(new \DateInterval('PT300S'));
         $this->get('cache.app')->save($result);
