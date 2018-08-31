@@ -1,0 +1,6 @@
+Current revision of eostracker-frontend:
+077ff3aca4ac47dc71a3caebb8d002bc77a2cc08 (branch service)
+
+Current revision of eostracker-api:
+65e231f3048a82a369b01d4779a6a8a7098dcac7 (branch master)
+
