@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, combineLatest, of } from 'rxjs';
-import { map, switchMap, share, catchError } from 'rxjs/operators';
+import { map, switchMap, share } from 'rxjs/operators';
 import { EosService } from '../../services/eos.service';
-import { AppService } from '../../services/app.service';
+import { AccountService } from '../../services/account.service';
+import { VoteService } from '../../services/vote.service';
+import { BpService } from '../../services/bp.service';
+import { Producer } from '../../models/Producer';
 
 @Component({
   templateUrl: './producer.component.html',
@@ -12,12 +15,14 @@ import { AppService } from '../../services/app.service';
 export class ProducerComponent implements OnInit {
 
   name$: Observable<string>;
-  producer$: Observable<any>;
+  producer$: Observable<Producer>;
 
   constructor(
     private route: ActivatedRoute,
     private eosService: EosService,
-    private appService: AppService
+    private accountService: AccountService,
+    private voteService: VoteService,
+    private bpService: BpService
   ) { }
 
   ngOnInit() {
@@ -29,7 +34,10 @@ export class ProducerComponent implements OnInit {
       this.eosService.getChainStatus(),
       this.eosService.getProducers(),
       this.name$.pipe(
-        switchMap(name => this.eosService.getDeferAccount(name))
+        switchMap(name => this.accountService.getAccount(name)),
+        switchMap(account => this.eosService.getAccount(account.name).pipe(
+          map(accountRaw => ({ ...account, raw: accountRaw }))
+        ))
       )
     ).pipe(
       map(([name, chainStatus, producers, account]) => {
@@ -65,8 +73,7 @@ export class ProducerComponent implements OnInit {
         if (!producer.url) {
           return of(producer);
         } else {
-          return this.appService.getBpJson(producer.url).pipe(
-            catchError(() => of(null)),
+          return this.bpService.getBP(producer.url).pipe(
             map(bpJson => ({
               ...producer,
               bpJson,

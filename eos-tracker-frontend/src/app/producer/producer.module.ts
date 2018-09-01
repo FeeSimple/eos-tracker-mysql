@@ -8,6 +8,7 @@ import { ProducerComponent } from './producer/producer.component';
 import { VoteProgressBarComponent } from './vote-progress-bar/vote-progress-bar.component';
 import { InformationComponent } from './producer/information/information.component';
 import { NodesComponent } from './producer/nodes/nodes.component';
+import { VotesComponent } from './producer/votes/votes.component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { NodesComponent } from './producer/nodes/nodes.component';
     ProducerComponent,
     VoteProgressBarComponent,
     InformationComponent,
-    NodesComponent
+    NodesComponent,
+    VotesComponent
   ]
 })
 export class ProducerModule { }

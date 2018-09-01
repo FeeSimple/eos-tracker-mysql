@@ -15,7 +15,7 @@ export class ChainStatusComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.status$ = this.appService.info$;
+    this.status$ = this.appService.chainStatus$;
   }
 
 }

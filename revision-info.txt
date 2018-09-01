@@ -1,11 +1,3 @@
-Current revision of eostracker-frontend: 
-ab345a11eb11ac17efc842b3c1ed701a8d5cd326 (branch master)
-
-Current revision of eostracker-api:
-2654d4e858744209d71e2fa40f109ebb66761c2b (branch master)
-
----------------------------------------------------------
-
 Current revision of eostracker-frontend:
 077ff3aca4ac47dc71a3caebb8d002bc77a2cc08 (branch service)
 

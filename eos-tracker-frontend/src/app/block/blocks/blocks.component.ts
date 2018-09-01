@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { BlockService } from '../../services/block.service';
+import { Block } from '../../models/Block';
 import { Observable, of } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
-import { AppService } from '../../services/app.service';
+import { switchMap, map, share } from 'rxjs/operators';
 
 @Component({
   templateUrl: './blocks.component.html',
@@ -11,37 +13,32 @@ import { AppService } from '../../services/app.service';
 export class BlocksComponent implements OnInit {
 
   columnHeaders$: Observable<string[]> = of(BLOCK_COLUMNS);
-  blocks$: Observable<any[]>;
-  pageIndex = 0;
-  pageSize = 10;
-  total = 0;
+  blocks$: Observable<Block[]>;
 
   constructor(
+    private route: ActivatedRoute,
     private breakpointObserver: BreakpointObserver,
-    private appService: AppService
+    private blockService: BlockService
   ) { }
 
   ngOnInit() {
     this.columnHeaders$ = this.breakpointObserver.observe(Breakpoints.XSmall).pipe(
       map(result => result.matches ? BLOCK_COLUMNS.filter(c => c !== 'timestamp') : BLOCK_COLUMNS)
     );
-    this.blocks$ = this.appService.getBlocks(this.pageIndex, this.pageSize).pipe(
-      tap(blocks => {
-        this.total = blocks[0].block_num;
-      })
+    this.blocks$ = this.route.queryParams.pipe(
+      map(queryParams => queryParams.page ? Number(queryParams.page) : 1),
+      switchMap(page => this.blockService.getBlocks(page)),
+      share()
     );
-  }
-
-  onPaging(pageEvent) {
-    this.pageIndex = pageEvent.pageIndex;
-    this.blocks$ = this.appService.getBlocks(pageEvent.length - pageEvent.pageSize * pageEvent.pageIndex);
   }
 
 }
 
 export const BLOCK_COLUMNS = [
-  'block_num',
+  'blockNumber',
   'timestamp',
+  'irreversible',
   'producer',
-  'transactions'
+  'numTransactions',
+  'confirmed'
 ];
