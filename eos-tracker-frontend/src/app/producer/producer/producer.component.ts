@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, combineLatest, of } from 'rxjs';
-import { map, switchMap, share } from 'rxjs/operators';
+import { map, switchMap, share, catchError } from 'rxjs/operators';
 import { EosService } from '../../services/eos.service';
-import { AccountService } from '../../services/account.service';
-import { VoteService } from '../../services/vote.service';
-import { BpService } from '../../services/bp.service';
-import { Producer } from '../../models/Producer';
+import { AppService } from '../../services/app.service';
 
 @Component({
   templateUrl: './producer.component.html',
@@ -15,14 +12,12 @@ import { Producer } from '../../models/Producer';
 export class ProducerComponent implements OnInit {
 
   name$: Observable<string>;
-  producer$: Observable<Producer>;
+  producer$: Observable<any>;
 
   constructor(
     private route: ActivatedRoute,
     private eosService: EosService,
-    private accountService: AccountService,
-    private voteService: VoteService,
-    private bpService: BpService
+    private appService: AppService
   ) { }
 
   ngOnInit() {
@@ -34,10 +29,7 @@ export class ProducerComponent implements OnInit {
       this.eosService.getChainStatus(),
       this.eosService.getProducers(),
       this.name$.pipe(
-        switchMap(name => this.accountService.getAccount(name)),
-        switchMap(account => this.eosService.getAccount(account.name).pipe(
-          map(accountRaw => ({ ...account, raw: accountRaw }))
-        ))
+        switchMap(name => this.eosService.getDeferAccount(name))
       )
     ).pipe(
       map(([name, chainStatus, producers, account]) => {
@@ -73,7 +65,8 @@ export class ProducerComponent implements OnInit {
         if (!producer.url) {
           return of(producer);
         } else {
-          return this.bpService.getBP(producer.url).pipe(
+          return this.appService.getBpJson(producer.url).pipe(
+            catchError(() => of(null)),
             map(bpJson => ({
               ...producer,
               bpJson,

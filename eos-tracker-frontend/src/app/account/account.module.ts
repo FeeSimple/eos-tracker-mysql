@@ -4,8 +4,8 @@ import { AccountRoutingModule } from './account-routing.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
-import { AccountsComponent } from './accounts/accounts.component';
 import { AccountComponent } from './account/account.component';
 import { InformationComponent } from './account/information/information.component';
 import { TablesComponent } from './account/tables/tables.component';
@@ -19,10 +19,10 @@ import { CustomTokensComponent } from './account/custom-tokens/custom-tokens.com
     AccountRoutingModule,
     MatDialogModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    NgxChartsModule
   ],
   declarations: [
-    AccountsComponent,
     AccountComponent,
     InformationComponent,
     TablesComponent,

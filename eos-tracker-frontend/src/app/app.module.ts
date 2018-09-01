@@ -4,11 +4,6 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BlockService } from './services/block.service';
-import { TransactionService } from './services/transaction.service';
-import { DashboardService } from './services/dashboard.service';
-import { AccountService } from './services/account.service';
-import { ProducerService } from './services/producer.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { SafeJsonPipe } from 'angular2-prettyjson';
 import { JsonPipe } from '@angular/common';
@@ -16,15 +11,8 @@ import { EosService } from './services/eos.service';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { Ng2Webstorage } from 'ngx-webstorage';
-import { CmcService } from './services/cmc.service';
-import { ActionService } from './services/action.service';
-import { StatService } from './services/stat.service';
-import { VoteService } from './services/vote.service';
-import { BpService } from './services/bp.service';
 import { ScatterService } from './services/scatter.service';
 import { AppService } from './services/app.service';
-import { DataService } from './services/data.service';
-import { ApiService } from './services/api.service';
 import { LoggerService } from './services/logger.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -51,21 +39,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppRoutingModule
   ],
   providers: [
-    BlockService,
-    TransactionService,
-    DashboardService,
     EosService,
     ScatterService,
-    AccountService,
-    ProducerService,
-    CmcService,
-    ActionService,
-    StatService,
-    VoteService,
-    BpService,
     AppService,
-    DataService,
-    ApiService,
     LoggerService,
     { provide: JsonPipe, useClass: SafeJsonPipe }
   ],

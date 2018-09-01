@@ -4,19 +4,13 @@
   </h1>
 </mat-toolbar>
 <div>
-  <div style="padding:10px;">
+  <div style="margin:10px;">
     <app-dashboard-chain-status></app-dashboard-chain-status>
   </div>
-  <div style="padding:10px;" *ngIf="isMaintenance$ | async">
-    <app-dashboard-maintenance></app-dashboard-maintenance>
+  <div style="margin:10px;">
+    <app-dashboard-blocks></app-dashboard-blocks>
   </div>
-  <!-- <app-dashboard-stats></app-dashboard-stats> -->
-  <div fxLayout.gt-md="row" fxLayout="column">
-    <div fxFlex style="padding:10px;">
-      <app-dashboard-blocks></app-dashboard-blocks>
-    </div>
-    <div fxFlex style="padding:10px;">
-      <app-dashboard-transactions></app-dashboard-transactions>
-    </div>
+  <div style="margin:10px;">
+    <app-dashboard-transactions></app-dashboard-transactions>
   </div>
 </div>
