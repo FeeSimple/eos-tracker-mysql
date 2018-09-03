@@ -74,7 +74,7 @@ Install dependencies with composer
 Config file of MySQL connection for eos-tracker-api
 
     // Specify MySQL URL and password
-    app/config/parameters.yml
+    app/config/parameters.yml.dist
 
         # This file is auto-generated during the composer install parameters:
         secret: 123
