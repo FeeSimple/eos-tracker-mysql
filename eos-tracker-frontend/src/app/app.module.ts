@@ -4,8 +4,6 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BlockService } from './services/block.service';
-import { TransactionService } from './services/transaction.service';
 import { DashboardService } from './services/dashboard.service';
 import { AccountService } from './services/account.service';
 import { ProducerService } from './services/producer.service';
@@ -23,7 +21,6 @@ import { VoteService } from './services/vote.service';
 import { BpService } from './services/bp.service';
 import { ScatterService } from './services/scatter.service';
 import { AppService } from './services/app.service';
-import { DataService } from './services/data.service';
 import { ApiService } from './services/api.service';
 import { LoggerService } from './services/logger.service';
 
@@ -51,8 +48,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppRoutingModule
   ],
   providers: [
-    BlockService,
-    TransactionService,
     DashboardService,
     EosService,
     ScatterService,
@@ -64,7 +59,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     VoteService,
     BpService,
     AppService,
-    DataService,
     ApiService,
     LoggerService,
     { provide: JsonPipe, useClass: SafeJsonPipe }
