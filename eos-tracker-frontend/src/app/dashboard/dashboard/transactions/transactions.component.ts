@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { TransactionService } from '../../../services/transaction.service';
-import { Transaction } from '../../../models/Transaction';
-import { Observable, timer, of } from 'rxjs';
-import { switchMap, share, map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { AppService } from '../../../services/app.service';
 
 @Component({
   selector: 'app-dashboard-transactions',
@@ -12,28 +11,35 @@ import { switchMap, share, map } from 'rxjs/operators';
 })
 export class TransactionsComponent implements OnInit {
 
-  transactions$: Observable<Transaction[]>;
-  transactionsColumns$ = of(TRANSACTIONS_COLUMNS);
+  columnHeaders$: Observable<string[]> = of(DEFAULT_HEADERS);
+  transactions$;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private transactionService: TransactionService
+    private appService: AppService
   ) { }
 
   ngOnInit() {
-    this.transactionsColumns$ = this.breakpointObserver.observe(Breakpoints.XSmall).pipe(
-      map(result => result.matches ? TRANSACTIONS_COLUMNS.filter(c => c !== 'createdAt') : TRANSACTIONS_COLUMNS)
+    this.columnHeaders$ = this.breakpointObserver.observe(Breakpoints.XSmall).pipe(
+      map(result => result.matches ? XSMALL_HEADERS : DEFAULT_HEADERS)
     );
-    this.transactions$ = timer(0, 5000).pipe(
-      switchMap(() => this.transactionService.getTransactions(undefined, 20)),
-      share()
+    this.transactions$ = this.appService.recentTransactions$.pipe(
+      map(transactions => transactions.slice(0, 50))
     );
   }
 
 }
 
-export const TRANSACTIONS_COLUMNS = [
+const DEFAULT_HEADERS = [
   'id',
-  'createdAt',
-  'numActions'
+  'block_num',
+  'cpu',
+  'net',
+  'actions'
+];
+
+const XSMALL_HEADERS = [
+  'id',
+  'block_num',
+  'actions'
 ];

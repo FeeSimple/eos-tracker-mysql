@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { LocalStorage } from 'ngx-webstorage';
+import { take } from 'rxjs/operators';
+import { EosService } from '../../services/eos.service';
 
 @Component({
   templateUrl: './settings.component.html',
@@ -14,7 +16,8 @@ export class SettingsComponent implements OnInit {
   languageControl: FormControl;
 
   constructor(
-    private translate: TranslateService
+    private translate: TranslateService,
+    private eosService: EosService
   ) { }
 
   ngOnInit() {

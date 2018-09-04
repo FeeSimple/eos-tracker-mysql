@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of, empty } from 'rxjs';
 import { map, tap, switchMap, catchError } from 'rxjs/operators';
-import { TransactionService } from '../../services/transaction.service';
-import { BlockService } from '../../services/block.service';
-import { AccountService } from '../../services/account.service';
+import { EosService } from '../../services/eos.service';
 
 @Component({
   selector: 'app-search',
@@ -19,9 +17,7 @@ export class SearchComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private transactionService: TransactionService,
-    private blockService: BlockService,
-    private accountService: AccountService
+    private eosService: EosService
   ) { }
 
   ngOnInit() {
@@ -32,7 +28,6 @@ export class SearchComponent implements OnInit {
       switchMap(query => this.tryBlockNumber(query)),
       switchMap(query => this.tryTransaction(query)),
       switchMap(query => this.tryBlockId(query)),
-      switchMap(query => this.tryAccountKey(query)),
       switchMap(query => this.tryAccount(query)),
       tap(query => console.log('no result', query))
     );
@@ -41,7 +36,7 @@ export class SearchComponent implements OnInit {
   private tryBlockNumber(query: string): Observable<string> {
     const blockNumber = Number(query);
     if (!isNaN(blockNumber)) {
-      return this.blockService.getBlock(blockNumber).pipe(
+      return this.eosService.getDeferBlock(blockNumber).pipe(
         catchError(() => of(null)),
         switchMap(data => {
           if (data) {
@@ -57,11 +52,11 @@ export class SearchComponent implements OnInit {
 
   private tryTransaction(query: string): Observable<string> {
     if (query.length === 64) {
-      return this.transactionService.getTransaction(query).pipe(
+      return this.eosService.getDeferTransaction(query).pipe(
         catchError(() => of(null)),
-        switchMap(data => {
-          if (data && !data.isError) {
-            this.router.navigate(['/transactions', query], { replaceUrl: true });
+        switchMap(transaction => {
+          if (transaction) {
+            this.router.navigate(['/transactions', transaction.block_num, transaction.id], { replaceUrl: true });
             return empty();
           }
           return of(query);
@@ -73,27 +68,11 @@ export class SearchComponent implements OnInit {
 
   private tryBlockId(query: string): Observable<string> {
     if (query.length === 64) {
-      return this.blockService.getBlockId(query).pipe(
+      return this.eosService.getDeferBlock(query).pipe(
         catchError(() => of(null)),
-        switchMap(data => {
-          if (data) {
-            this.router.navigate(['/blocks', data['blockNumber']], { replaceUrl: true });
-            return empty();
-          }
-          return of(query);
-        })
-      );
-    }
-    return of(query);
-  }
-
-  private tryAccountKey(query: string): Observable<string> {
-    if (query.length === 53) {
-      return this.accountService.getAccountKey(query).pipe(
-        catchError(() => of(null)),
-        switchMap(data => {
-          if (data) {
-            this.router.navigate(['/accounts', data['name']], { replaceUrl: true });
+        switchMap(block => {
+          if (block) {
+            this.router.navigate(['/blocks', block.block_num], { replaceUrl: true });
             return empty();
           }
           return of(query);
@@ -105,11 +84,11 @@ export class SearchComponent implements OnInit {
 
   private tryAccount(query: string): Observable<string> {
     if (query.length <= 12) {
-      return this.accountService.getAccount(query).pipe(
+      return this.eosService.getDeferAccount(query).pipe(
         catchError(() => of(null)),
-        switchMap(data => {
-          if (data) {
-            this.router.navigate(['/accounts', data['name']], { replaceUrl: true });
+        switchMap(account => {
+          if (account) {
+            this.router.navigate(['/accounts', account.account_name], { replaceUrl: true });
             return empty();
           }
           return of(query);
