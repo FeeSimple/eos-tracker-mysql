@@ -161,3 +161,8 @@ To start the frontend at specific IP:Port
 
     or run the below cmd:
     pm2 start script_run_frontend.sh
+
+To debug the frontend:
+
+    npm run build
+    pm2 restart <PID>
