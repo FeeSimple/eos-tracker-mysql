@@ -2,7 +2,10 @@
 
 XFS tracker tool is made up of the following things:
 
-    eos-tracker-frontend <--> eos-tracker-api <--> MySQL <--> Redis <--> nodeos
+    eos-tracker-frontend <--> eos-tracker-api <--> MySQL <--> Redis <--> nodeos <--> blockchain
+           ^                                                                ^
+           |                                                                |
+           |----------------------------------------------------------------|
 
 ## Redis
 
