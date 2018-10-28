@@ -14,9 +14,26 @@ export class AccountService {
     private eosService: EosService
   ) { }
 
-  getAccount(name: string): Observable<Account> {
+  // getAccount(name: string): Observable<Account> {
+  //   return this.http.get(`${environment.apiUrl}/accounts/${name}`).pipe(
+  //     map(account => account as Account)
+  //   );
+  // }
+
+  getAccountFromDb(name: string): Observable<Account> {
     return this.http.get(`${environment.apiUrl}/accounts/${name}`).pipe(
       map(account => account as Account)
+    );
+  }
+
+  getAccount(name: string): Observable<Account> {
+    const accountDb = this.getAccountFromDb(`${name}`);
+
+    return this.eosService.eos.getAccount(`${name}`).pipe(
+      map((data: any) => (
+        {name: data.account_name, 
+         createdAt: data.created
+         } as Account))
     );
   }
 
