@@ -1,6 +1,6 @@
 # XFS tracker with MySQL
 
-XFS tracker tool is composed of the following:
+XFS tracker is composed of the following:
 
     eos-tracker-frontend <--> eos-tracker-api <--> MySQL <--> Redis <--> nodeos <--> blockchain
            ^                                                                ^
