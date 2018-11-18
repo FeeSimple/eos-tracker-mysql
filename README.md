@@ -1,6 +1,6 @@
-# XFS tracker tool with MySQL
+# XFS tracker with MySQL
 
-XFS tracker tool is made up of the following things:
+XFS tracker tool is composed of the following:
 
     eos-tracker-frontend <--> eos-tracker-api <--> MySQL <--> Redis <--> nodeos <--> blockchain
            ^                                                                ^
@@ -16,7 +16,7 @@ Install and start
 
 ## nodeos
 
-Start nodeos (EOS daemon) with connection to mongodb named "EOStest"
+Start nodeos (EOS daemon) with a connection to mongodb named "EOStest"
 by running the following cmd:
 
     cd nodeos
@@ -24,6 +24,7 @@ by running the following cmd:
     pm2 start client_node_connect_to_testnet_mongo/script_client_node_mongo.sh
     or:
     pm2 start single_eosio_producer_mongo/script_eosio_producer_mongo.sh
+
 
 ## eos-tracker-api
 
@@ -67,12 +68,10 @@ Install others (Mac)
     // http://php.net/manual/en/mongodb.installation.pecl.php
     sudo pecl install mongodb
 
-
 Install dependencies with composer
 
     composer update
     composer install
-
 
 Config file of MySQL connection for eos-tracker-api
 
@@ -84,7 +83,6 @@ Config file of MySQL connection for eos-tracker-api
         env(DB_URL): 'mysql://root@localhost/eos'
         env(DB_PASSWORD): 'feesimple'
         env(REDIS_URL): 'redis://root@localhost:6379'
-
 
     // Use the above-specified MySQL URL and password
     app/config/config.yml
@@ -101,7 +99,6 @@ Config file of MySQL connection for eos-tracker-api
 
         ....
 
-
 To start:
 
     // API server listens at port 4201.
@@ -110,7 +107,7 @@ To start:
 
     php bin/console server:run 127.0.0.1:4201
 
-Or run this cmd:
+Or, run this cmd:
 
     pm2 start script_tracker_api.sh
 
@@ -119,7 +116,7 @@ Or run this cmd:
 
 https://github.com/EOSEssentials/EOSTracker
 
-XFS Tracker is a Frontend based on Angular4 that connects to XFS Tracker API.
+XFS Tracker is a frontend based on Angular4 that connects to the XFS Tracker API.
 
 Config file of eos-tracker-frontend for interacting with eos-tracker-api:
 
@@ -148,7 +145,6 @@ Config file of eos-tracker-frontend for interacting with eos-tracker-api:
     `/etc/nginx/conf.d/feesimpletracker.io.conf`.
     Any traffic to https at port 444 will be redirected to 127.0.0.1:4201
 
-
 Installation
 
     sudo npm install -g @angular/cli@latest
@@ -158,7 +154,7 @@ Installation
     // Critical to run the below cmd. Otherwise, cannot start server
     npm run postinstall
 
-To start the frontend at specific IP:Port
+To start the frontend at a specific IP:Port
 
     npm start
 
